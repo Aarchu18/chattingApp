@@ -9,7 +9,7 @@ import { ChatServiceService } from './chat-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from './header/header.component';
+
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -38,7 +38,7 @@ const routes: Routes = [{
     AppComponent,
     SignInComponent,
     ChatComponent,
-    HeaderComponent
+  
   ],
   imports: [
     BrowserModule,

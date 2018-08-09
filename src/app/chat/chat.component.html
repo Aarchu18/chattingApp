@@ -1,9 +1,10 @@
 <div class="container">
   <div class="jumbotron">
+    <h1 id="title">Chatting App</h1>
     <input id="style" type="text" class="form-control" placeholder="Search Channel" [(ngModel)]="channel">
     <button id="searchButton" (click)="searchChannel()" class=" btn btn-success">find</button>
     <button id="joinButton" class="btn btn-success" (click)="joinChannel()">Join</button>
-    <span>{{foundChannel}}</span>
+    <div >{{foundChannel}}</div>
     <div class="leftSide">
       <br/>
       <input type="text" placeholder="Your Channel Name" class="form-control" [(ngModel)]="newChannel">

@@ -50,6 +50,9 @@
 .sidenav a:hover {
   color: #064579;
 }
+#title{
+    margin-top:-10px;
+}
 
 #sendButton {
   position: fixed;
