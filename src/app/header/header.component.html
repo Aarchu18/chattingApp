@@ -1,0 +1,10 @@
+<p>
+  header works!
+</p>
+<div class="header">
+  <input type="text" class="form-control" placeholder="Search Channel" [(ngModel)]="channel">
+
+  <!-- <button type="button" id="searchButton"(click)="searchChannel()" class="btn btn-success"> -->
+  <button id="searchButton" (click)="searchChannel()" class="glyphicon glyphicon-search"></button>
+  <span>{{foundChannel}}</span>
+</div>

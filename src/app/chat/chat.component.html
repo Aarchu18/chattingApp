@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="jumbotron">
+    <input id="style" type="text" class="form-control" placeholder="Search Channel" [(ngModel)]="channel">
+    <button id="searchButton" (click)="searchChannel()" class=" btn btn-success">find</button>
+    <button id="joinButton" class="btn btn-success" (click)="joinChannel()">Join</button>
+    <span>{{foundChannel}}</span>
+    <div class="leftSide">
+      <br/>
+      <input type="text" placeholder="Your Channel Name" class="form-control" [(ngModel)]="newChannel">
+      <button type="button" id="addButton" class="btn btn-success" (click)=" addChannels()">Add</button>
+
+      <p>
+        <b>Your channels</b>
+      </p>
+    </div>
+
+    <div class="sidenav">
+      <ul class="list-unstyled" *ngFor="let message of allMessages">
+        <li class="text-center" id="message">{{message.body}}</li>
+      </ul>
+      <input id="search" type="text" placeholder="Your Message" class="form-control" [(ngModel)]="myMessages">
+      <button id="sendButton" class="btn btn-success" (click)="sendMessage()">send</button>
+
+    </div>
+    <div class="messageSend">
+
+    </div>
+
+
+  </div>
+
+</div>

@@ -1,0 +1,92 @@
+.jumbotron {
+  width: 40%;
+  margin-top: 28px;
+  height: 820px;
+}
+
+#joinButton {
+  margin-top: 7px;
+  margin-left: 150px;
+}
+#addButton {
+    margin-top: 7px;
+    margin-left: 150px;
+  }
+  #searchButton{
+    margin-top: 5px;
+    margin-left: 30px;
+  }
+
+.sidenav {
+  width: 630px;
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  right: 10px;
+  background: #eee;
+  overflow-x: hidden;
+  padding: 8px 0;
+  margin-top: 10px;
+  margin-right: 50px;
+  height: 88%;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #2196F3;
+  display: block;
+}
+
+#searchInput {
+  width: 20px;
+}
+
+#message {
+  text-decoration: center;
+}
+
+.sidenav a:hover {
+  color: #064579;
+}
+
+#sendButton {
+  position: fixed;
+  bottom: 25px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#search {
+  width: 47%;
+  position: fixed;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  bottom: 20px;
+  z-index: 99;
+}
+
+.main {
+  margin-left: 140px;
+  /* Same width as the sidebar + left position in px */
+  font-size: 28px;
+  /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
