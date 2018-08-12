@@ -22,11 +22,15 @@ export class SignInComponent implements OnInit {
 
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
-        console.log(socialPlatform + " sign in data : ", userData);
+        console.log(socialPlatform + " sign in data : ", userData.name,userData);
         localStorage.setItem("Identity",userData.email);
-        // Now sign-in with userData
-        // ...
-        this.chatService.setData(userData);
+        localStorage.setItem("id",userData.id);
+        localStorage.setItem("name",userData.name);
+        localStorage.setItem("image",userData.image);
+        
+        // Now sign-in with userDatauser
+        // // ...
+        // this.chatService.setData(userData);
         this.routes.navigate(['/chat']);
       }
     );

@@ -1,24 +1,36 @@
 .jumbotron {
-  width: 40%;
-  margin-top: 28px;
-  height: 820px;
+  
+  width: 31%;
+  min-height: 698px;
+  margin-left: -39px;
+  background-color:#C18576;
 }
 
+
 #joinButton {
-  margin-top: 7px;
-  margin-left: 150px;
+  margin-top: -78px;
+  margin-left: 138px;
 }
+
+
 #addButton {
-    margin-top: 7px;
-    margin-left: 150px;
-  }
+  margin-top: -66px;
+  margin-left: 251px;
+  width: 54px;
+}
+  
   #searchButton{
     margin-top: 5px;
     margin-left: 30px;
   }
 
 .sidenav {
-  width: 630px;
+  margin-left: -38px;
+  margin-right: 31px;
+  width: 67%;
+  /* height: 102%; */
+  margin-top:90px;
+
   position: fixed;
   z-index: 1;
   top: 20px;
@@ -26,9 +38,14 @@
   background: #eee;
   overflow-x: hidden;
   padding: 8px 0;
-  margin-top: 10px;
-  margin-right: 50px;
-  height: 88%;
+  
+  
+  height: 75%;
+}
+.header input{
+  margin-bottom: 8px;
+  margin-left: 35px;
+  width: 290px;
 }
 
 .sidenav a {
@@ -42,6 +59,10 @@
 #searchInput {
   width: 20px;
 }
+.leftSide input{
+  width: 240px;
+  margin-left: -25px;
+}
 
 #message {
   text-decoration: center;
@@ -50,14 +71,17 @@
 .sidenav a:hover {
   color: #064579;
 }
-#title{
+/* #title{
     margin-top:-10px;
+} */
+.style{
+  width: 30%;
 }
 
 #sendButton {
   position: fixed;
   bottom: 25px;
-  right: 30px;
+  right: 59px;
   z-index: 99;
   font-size: 18px;
   border: none;
@@ -68,13 +92,19 @@
 }
 
 #search {
-  width: 47%;
+  width: 60%;
   position: fixed;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
   bottom: 20px;
   z-index: 99;
+}
+.form-control{
+  width: 191px;
+    margin-left: 20px;
+  
+  
 }
 
 .main {
@@ -92,4 +122,47 @@
   .sidenav a {
     font-size: 18px;
   }
+}
+.my{
+  background-color: rgba(245, 72, 78, 0.801);
+  color:white;
+  width: 80%;
+  float: right;
+  text-align: right;
+  border-radius: 15% 0% 0% 15%;
+  margin-top: 2%; 
+  margin-right: 15%
+}
+.my p{
+  margin-left: 30%;   
+}
+.your{
+  background-color: aquamarine;
+  width: 80%;
+  float:left;
+  border-radius: 0% 15% 15% 0%;
+  margin-top: 2%;
+  margin-left: 5%; 
+
+}
+.profileImage{
+  border-radius: 50px;
+  height: 50px;
+  width: 50px;
+}
+.profileName{
+  margin-top: -37px;
+  margin-left: 60px;
+}
+.header{
+  height: 30%;
+    width: 105%;
+    margin-left: -39px;
+    background-color:#C18576;
+
+}
+.channelName{
+  margin-top: -47px;
+    margin-left: 556px;
+   
 }

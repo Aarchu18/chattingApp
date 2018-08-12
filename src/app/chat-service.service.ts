@@ -45,11 +45,18 @@ export class ChatServiceService {
   }
 
   sendMessage(myMessages): Observable<any> {
-    return this.http.post("https://chat.twilio.com/v2/Services/" + this.serviceId + "/Channels/" + this.channelId + "/Messages", "ChannelSid=" + this.channelId + "&ServiceSid=" + this.serviceId + "&Body=" + myMessages + "&From=" + this.identity, this.httpOptions);
+    return this.http.post("https://chat.twilio.com/v2/Services/" + this.serviceId + "/Channels/" + this.msgChannelId + "/Messages", "ChannelSid=" + this.channelId + "&ServiceSid=" + this.serviceId + "&Body=" + myMessages + "&From=" + this.identity, this.httpOptions);
   }
+  msgChannelId:string;
 
-  getAllMessages(): Observable<any> {
-    return this.http.get("https://chat.twilio.com/v2/Services/" + this.serviceId + "/Channels/" + this.channelId + "/Messages", this.httpOptions).pipe(map(data => data));
+  getAllMessages(channelId): Observable<any> {
+    this.msgChannelId=channelId;
+    return this.http.get("https://chat.twilio.com/v2/Services/" + this.serviceId + "/Channels/" +channelId + "/Messages", this.httpOptions).pipe(map(data => data));
   }
-
+  getMembersOfChannel(myChannelId):Observable<any>{
+    return this.http.get("https://chat.twilio.com/v2/Services/"+this.serviceId+"/Channels/"+myChannelId+"/Members",this.httpOptions);
+  }
+  getChannelDetail(myChannelId):Observable<any>{
+    return this.http.get("https://chat.twilio.com/v2/Services/"+this.serviceId+"/Channels/"+myChannelId,this.httpOptions).pipe(map(data=>data));
+  }
 }

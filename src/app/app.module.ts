@@ -9,6 +9,8 @@ import { ChatServiceService } from './chat-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import{AuthServiceService} from  './auth-service.service';
+
 
 
 export function getAuthServiceConfigs() {
@@ -20,8 +22,8 @@ export function getAuthServiceConfigs() {
         provider: new GoogleLoginProvider("223287134681-ttbua9pekt3i80jqvhhco3e6m12897di.apps.googleusercontent.com")
       },
 
-    ]
-  );
+    ]);
+
   return config;
 }
 const routes: Routes = [{
@@ -29,8 +31,15 @@ const routes: Routes = [{
   component: SignInComponent
 },
 {
-  path: "chat",
-  component: ChatComponent
+  path:'chat',
+  canActivate:[AuthServiceService],
+
+  component: ChatComponent,
+},
+  
+{
+  path: "**",
+  component:SignInComponent
 }
 ];
 @NgModule({
@@ -39,6 +48,7 @@ const routes: Routes = [{
     SignInComponent,
     ChatComponent,
   
+
   ],
   imports: [
     BrowserModule,
@@ -49,6 +59,7 @@ const routes: Routes = [{
     RouterModule.forRoot(routes)
   ],
   providers: [
+    AuthServiceService,
     ChatServiceService,
     {
       provide: AuthServiceConfig,
