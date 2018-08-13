@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatServiceService } from '../chat-service.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -18,10 +18,10 @@ export class ChatComponent implements OnInit {
   myMessages: string;
   newChannel: string;
   name = localStorage.getItem("name");
-  image=localStorage.getItem("image");
+  image = localStorage.getItem("image");
 
 
-  constructor(private chatService: ChatServiceService) { }
+  constructor(private chatService: ChatServiceService, private routes: Router) { }
   addChannels() {
     console.log("new Channel Name: " + this.newChannel);
     this.chatService.addChannels(this.newChannel).subscribe(response => {
@@ -59,17 +59,28 @@ export class ChatComponent implements OnInit {
     console.log(this.getCId);
     this.chatService.joinChannel(this.getCId).subscribe(res => {
       console.log(res);
-     
+      this.routes.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
+        this.routes.navigate(["/chat"]));
     }, err => {
       console.log(err);
+
     })
   }
+  // this.setinterval=setInterval(()=>{
+  //   this.chatService.getAllMessages().subscribe(res=>{
+  //     this.messages=res.messages;
+
+  //   })
+  // })
 
 
   sendMessage() {
     this.chatService.sendMessage(this.myMessages).subscribe(res => {
       console.log(res);
-      setTimeout("location.reload(true);",500);
+      //  this.chatService.getAllMessages(channelId);
+      // setInterval("location.reload(true);", 500);
+      // this.routes.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
+      // this.routes.navigate(["/chat"]));
     },
       err => {
         console.log(err);
@@ -77,25 +88,36 @@ export class ChatComponent implements OnInit {
 
 
   }
-
+channels:string="";
   getAllMessages(channelId) {
     this.getChannelName(channelId);
     this.allMessages = [];
+    this.channels=channelId;
 
     this.chatService.getAllMessages(channelId).subscribe(res => {
-      this.totalMessages = res.messages.length;
-      for (let index = 0; index < this.totalMessages; index++) {
-        if (res.messages[index].from == this.roleIdentity)
-          this.allMessages[index] = { msg: res.messages[index].body, sender: true, senderId: res.messages[index].from }
-        else
-          this.allMessages[index] = { msg: res.messages[index].body, sender: false, senderId: res.messages[index].from }
-      }
+      setInterval(() => {
+        this.chatService.getAllMessages(this.channels).subscribe(res => {
+          this.totalMessages = res.messages.length;
+          for (let index = 0; index < this.totalMessages; index++) {
+            if (res.messages[index].from == this.roleIdentity)
+              this.allMessages[index] = { msg: res.messages[index].body, sender: true, senderId: res.messages[index].from }
+            else
+              this.allMessages[index] = { msg: res.messages[index].body, sender: false, senderId: res.messages[index].from }
+          }
+        }),
+          err => {
+            console.log(err);
+          }
+      }, 1000);
 
-    },
       err => {
         console.log(err);
-      })
-  }
+      }
+
+  })
+}
+
+
   totalChannels = [];
   cSid: string;
   channelName: string;
@@ -114,7 +136,7 @@ export class ChatComponent implements OnInit {
     })
   }
   myChannelList: Array<{ name: string, id: string }> = [];
- 
+
   roleIdentity = this.chatService.identity;
   seperateChannelSid(res) {
     console.log(this.totalChannels, "this.totalChannerls");
@@ -127,7 +149,7 @@ export class ChatComponent implements OnInit {
             this.myChannelList.push({ name: elemet.unique_name, id: elemet.sid })
           }
         })
-       
+
       }
 
     });
@@ -150,12 +172,18 @@ export class ChatComponent implements OnInit {
 
     });
   }
+  signOut() {
+    localStorage.clear();
+    this.routes.navigate(['/']);
+  }
+
   ngOnInit() {
 
     this.listJoinedChannel();
-    this.getAllMessages("CH00f88cb20a7c48f69324f18fd616360c");
-    this.chatService.joinChannel("CH00f88cb20a7c48f69324f18fd616360c");
+    this.getAllMessages("");
+    // this.chatService.joinChannel("CHccf567cff42447bdab60f7dfdfe10aeb");
 
     this.userData = this.chatService.getData();
+
   }
 }

@@ -5,18 +5,18 @@
     <br>
     <input id="style" type="text" class="form-control" (keyup)="searchChannel()" placeholder="Search Channel" [(ngModel)]="channel">
     <div class="channelName">
-      <h3>Channel Name: {{myChannelName}}</h3>
+      <h3>Your Channel: {{myChannelName}}</h3>
     </div>
   </div>
   <div class="jumbotron" align="center">
-    <div (click)="joinChannel()">{{foundChannel}}</div>
+    <div (click)="joinChannel()">{{gotChannel}}</div>
     <div class="leftSide">
       <br/>
       <input type="text" placeholder="Your Channel Name" class="form-control addChannel" [(ngModel)]="newChannel">
       <button type="button" id="addButton" class="btn btn-success" (click)=" addChannels()">Add</button>
 
       <div>
-        <p>Your channels</p>
+        <h4>Your channels</h4>
         <p *ngFor="let channelId of myChannelList" (click)="getAllMessages(channelId.id)">#{{channelId.name}}</p>
       </div>
 
@@ -32,6 +32,8 @@
       <button id="sendButton" class="btn btn-success" (click)="sendMessage()">send</button>
 
     </div>
+   
   </div>
+  <button id="signoutButton" (click)="signOut()" class="btn btn-success">SignOut</button>
 
 </div>
