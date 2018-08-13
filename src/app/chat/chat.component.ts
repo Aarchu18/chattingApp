@@ -8,9 +8,9 @@ import { ChatServiceService } from '../chat-service.service';
 })
 export class ChatComponent implements OnInit {
   channel: string = "";
-  foundChannel = "";
+  gotChannel = "";
   channelArray: any = [];
-  getChannelId = "";
+  getCId = "";
   arrayLength;
   userData: any;
   allMessages = [];
@@ -24,11 +24,11 @@ export class ChatComponent implements OnInit {
   constructor(private chatService: ChatServiceService) { }
   addChannels() {
     console.log("new Channel Name: " + this.newChannel);
-    this.chatService.addChannels(this.newChannel).subscribe(res => {
-      console.log("channel created " + JSON.stringify(res.sid));
+    this.chatService.addChannels(this.newChannel).subscribe(response => {
+      console.log("channel created " + JSON.stringify(response.sid));
     },
-      err => {
-        console.log(err);
+      error => {
+        console.log(error);
       });
   }
 
@@ -40,13 +40,13 @@ export class ChatComponent implements OnInit {
         this.arrayLength = this.channelArray.length;
         for (let index = 0; index < this.arrayLength; index++) {
           if (this.channelArray[index] == this.channel) {
-            this.foundChannel = this.channel;
-            this.getChannelId = res.channels[index].sid;
+            this.gotChannel = this.channel;
+            this.getCId = res.channels[index].sid;
             break;
           }
           else {
 
-            this.foundChannel = "not Getting Your Channel";
+            this.gotChannel = "not Getting Your Channel";
           }
         }
       }
@@ -56,9 +56,10 @@ export class ChatComponent implements OnInit {
       })
   }
   joinChannel() {
-    console.log(this.getChannelId);
-    this.chatService.joinChannel(this.getChannelId).subscribe(res => {
+    console.log(this.getCId);
+    this.chatService.joinChannel(this.getCId).subscribe(res => {
       console.log(res);
+     
     }, err => {
       console.log(err);
     })
@@ -80,7 +81,7 @@ export class ChatComponent implements OnInit {
   getAllMessages(channelId) {
     this.getChannelName(channelId);
     this.allMessages = [];
-    console.log("working");
+
     this.chatService.getAllMessages(channelId).subscribe(res => {
       this.totalMessages = res.messages.length;
       for (let index = 0; index < this.totalMessages; index++) {
@@ -96,26 +97,24 @@ export class ChatComponent implements OnInit {
       })
   }
   totalChannels = [];
-  channelSid: string;
+  cSid: string;
   channelName: string;
-  channelSidList = [];
+  cSidList = [];
   listJoinedChannel() {
     this.chatService.searchChannel().subscribe(res => {
       console.log('res', res)
       this.totalChannels = res.channels;
       for (let index = 0; index < res.channels.length; index++) {
-        this.channelSid = res.channels[index].sid;
+        this.cSid = res.channels[index].sid;
 
-        this.channelSidList[index] = (this.channelSid);
+        this.cSidList[index] = (this.cSid);
       }
 
-      this.userListInChannel(this.channelSidList);
+      this.userListInChannel(this.cSidList);
     })
   }
   myChannelList: Array<{ name: string, id: string }> = [];
-  // test(cSid) {
-  //   console.log("in test : ", cSid)
-  // }
+ 
   roleIdentity = this.chatService.identity;
   seperateChannelSid(res) {
     console.log(this.totalChannels, "this.totalChannerls");
@@ -128,7 +127,7 @@ export class ChatComponent implements OnInit {
             this.myChannelList.push({ name: elemet.unique_name, id: elemet.sid })
           }
         })
-        // this.test(element1.channel_sid)
+       
       }
 
     });
@@ -155,6 +154,7 @@ export class ChatComponent implements OnInit {
 
     this.listJoinedChannel();
     this.getAllMessages("CH00f88cb20a7c48f69324f18fd616360c");
+    this.chatService.joinChannel("CH00f88cb20a7c48f69324f18fd616360c");
 
     this.userData = this.chatService.getData();
   }

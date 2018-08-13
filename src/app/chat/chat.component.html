@@ -1,54 +1,37 @@
 <div class="container">
   <div class="header">
-      <img class="profileImage"[src]='image'/>
-      <p class="profileName"> {{name}}!!</p><br>
-      <input id="style" type="text" class="form-control" (keyup)="searchChannel()" placeholder="Search Channel" [(ngModel)]="channel">
-  
-    <!-- <button id="searchButton" (click)="searchChannel()" class=" btn btn-success">find</button> -->
-    <!-- <button id="joinButton" class="btn btn-success" (click)="joinChannel()">Join</button> -->
-    
-    
+    <img class="profileImage" [src]='image' />
+    <p class="profileName"> {{name}}!!</p>
+    <br>
+    <input id="style" type="text" class="form-control" (keyup)="searchChannel()" placeholder="Search Channel" [(ngModel)]="channel">
     <div class="channelName">
-        <h3>Channel Name: {{myChannelName}}</h3>
-      </div>
+      <h3>Channel Name: {{myChannelName}}</h3>
     </div>
+  </div>
   <div class="jumbotron" align="center">
-   
-     
-      <div (click)="joinChannel()">{{foundChannel}}</div>
-      <div class="leftSide">
+    <div (click)="joinChannel()">{{foundChannel}}</div>
+    <div class="leftSide">
       <br/>
       <input type="text" placeholder="Your Channel Name" class="form-control addChannel" [(ngModel)]="newChannel">
       <button type="button" id="addButton" class="btn btn-success" (click)=" addChannels()">Add</button>
 
-      <div >
+      <div>
         <p>Your channels</p>
-      
-  
         <p *ngFor="let channelId of myChannelList" (click)="getAllMessages(channelId.id)">#{{channelId.name}}</p>
       </div>
-      <!-- <p (click)="getAllMessages()">#Random</p> -->
+
     </div>
+    <div class="sidenav">
 
-    <!-- <div class="sidenav">
-      <ul class="list-unstyled" *ngFor="let message of allMessages">
-        <li class="text-center" id="message">{{message.body}}</li>
-      </ul> -->
-
-      <div class="sidenav">
-         
-        <ul *ngFor="let message of allMessages" >
-            <div [ngClass]="message.sender?'my':'your'">{{message.msg}}<p class="senderName">{{message.senderId}}</p></div>
-        </ul>
+      <ul *ngFor="let message of allMessages">
+        <div [ngClass]="message.sender?'me':'others'">{{message.msg}}
+          <p class="senderName">{{message.senderId}}</p>
+        </div>
+      </ul>
       <input id="search" type="text" placeholder="Your Message" class="form-control" [(ngModel)]="myMessages">
       <button id="sendButton" class="btn btn-success" (click)="sendMessage()">send</button>
 
     </div>
-    <div class="messageSend">
-
-    </div>
-
-
   </div>
 
 </div>

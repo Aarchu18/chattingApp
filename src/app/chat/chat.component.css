@@ -38,6 +38,7 @@
   background: #eee;
   overflow-x: hidden;
   padding: 8px 0;
+  overflow-y: scroll;
   
   
   height: 75%;
@@ -46,6 +47,7 @@
   margin-bottom: 8px;
   margin-left: 35px;
   width: 290px;
+ 
 }
 
 .sidenav a {
@@ -80,8 +82,8 @@
 
 #sendButton {
   position: fixed;
-  bottom: 25px;
-  right: 59px;
+  bottom: 81px;
+  right: 44px;
   z-index: 99;
   font-size: 18px;
   border: none;
@@ -97,8 +99,10 @@
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
-  bottom: 20px;
+  bottom: 74px;
   z-index: 99;
+  margin-left: 12px;
+ 
 }
 .form-control{
   width: 191px;
@@ -123,32 +127,34 @@
     font-size: 18px;
   }
 }
-.my{
-  background-color: rgba(245, 72, 78, 0.801);
-  color:white;
+.me{
+  background-color: rgba(49, 76, 228, 0.801);
+  border-radius: 25px;
   width: 80%;
   float: right;
   text-align: right;
-  border-radius: 15% 0% 0% 15%;
+
   margin-top: 2%; 
-  margin-right: 15%
+  margin-right: 20%
 }
-.my p{
-  margin-left: 30%;   
-}
-.your{
-  background-color: aquamarine;
+
+.others{
+  background-color:rgb(138, 132, 132);
   width: 80%;
   float:left;
-  border-radius: 0% 15% 15% 0%;
+  text-align:left;
+  border-radius: 25px;
   margin-top: 2%;
-  margin-left: 5%; 
+ 
 
 }
 .profileImage{
   border-radius: 50px;
   height: 50px;
   width: 50px;
+
+  margin-left: 6px;
+  margin-top: 3px;
 }
 .profileName{
   margin-top: -37px;
@@ -159,10 +165,16 @@
     width: 105%;
     margin-left: -39px;
     background-color:#C18576;
+   
 
 }
 .channelName{
   margin-top: -47px;
     margin-left: 556px;
-   
+}
+.me{
+  padding-right: 10px;
+}
+.others{
+  padding-left:10px;
 }
