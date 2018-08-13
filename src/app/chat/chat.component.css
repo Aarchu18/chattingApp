@@ -1,21 +1,28 @@
-.jumbotron {
-  
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css") ;
+
+.jumbotron {  
   width: 31%;
-  min-height: 698px;
-  margin-left: -39px;
-  background-color:#C18576;
+    height: 877px;
+    margin-left: -57px;
+    background-color: #4D384B;;
+    margin-top: -153px;
+    position: fixed;
+   
 }
 
 
 #joinButton {
   margin-top: -78px;
   margin-left: 138px;
+  
 }
 
-
+.channelList, .profileName,.gotChannel{
+  color: white;
+}
 #addButton {
   margin-top: -66px;
-  margin-left: 251px;
+  margin-left: 283px;
   width: 54px;
 }
   
@@ -25,12 +32,8 @@
   }
 
 .sidenav {
-  margin-left: -38px;
-  margin-right: 31px;
-  width: 67%;
-  /* height: 102%; */
-  margin-top:90px;
-
+  width: 834px;
+  margin-top: 88px;
   position: fixed;
   z-index: 1;
   top: 20px;
@@ -39,15 +42,17 @@
   overflow-x: hidden;
   padding: 8px 0;
   overflow-y: scroll;
-  
-  
-  height: 75%;
+  height: 749px;
+  color:none;
 }
 .header input{
   margin-bottom: 8px;
   margin-left: 35px;
   width: 290px;
  
+}
+.msg{
+  margin-bottom: 20px;
 }
 
 .sidenav a {
@@ -61,10 +66,10 @@
 #searchInput {
   width: 20px;
 }
-.leftSide input{
+/* .leftSide input{
   width: 240px;
   margin-left: -25px;
-}
+} */
 
 #message {
   text-decoration: center;
@@ -82,8 +87,8 @@
 
 #sendButton {
   position: fixed;
-  bottom: 81px;
-  right: 44px;
+  bottom:22px;
+  right: 18px;
   z-index: 99;
   font-size: 18px;
   border: none;
@@ -94,20 +99,24 @@
 }
 
 #search {
-  width: 60%;
-  position: fixed;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  bottom: 74px;
-  z-index: 99;
-  margin-left: 12px;
+  width: 61%;
+    position: fixed;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    bottom: 74px;
+    z-index: 99;
+    margin-bottom: -54px;
+    margin-left: 0px;
  
 }
+#searchChannel{
+  margin-top: 10px;
+  width: 50px;
+}
 .form-control{
-  width: 191px;
-    margin-left: 20px;
-  
+  width: 235px;
+    margin-left: -16px;
   
 }
 
@@ -128,49 +137,49 @@
   }
 }
 .me{
-  background-color: rgba(49, 76, 228, 0.801);
-  border-radius: 25px;
+  background-color: rgba(161, 172, 233, 0.801);
+  border-radius: 10px;
   width: 80%;
   float: right;
   text-align: right;
-
   margin-top: 2%; 
   margin-right: 20%
 }
 
 .others{
-  background-color:rgb(138, 132, 132);
+  background-color:rgb(235, 223, 223);
   width: 80%;
   float:left;
   text-align:left;
-  border-radius: 25px;
+  border-radius: 10px;
   margin-top: 2%;
  
 
 }
 .profileImage{
   border-radius: 50px;
-  height: 50px;
-  width: 50px;
-
-  margin-left: 6px;
-  margin-top: 3px;
+    height: 50px;
+    width: 50px;
+    margin-left: -317px;
+    margin-top: -71px;
 }
 .profileName{
-  margin-top: -37px;
-  margin-left: 60px;
-}
-.header{
-  height: 30%;
-    width: 105%;
-    margin-left: -39px;
-    background-color:#C18576;
-   
+  margin-top: -62px;
+ 
+  margin-left: -133px;
 
 }
+.header{
+  height: 119px;
+  width: 878px;
+  margin-left: 287px;
+  background: #eee;
+  margin-top: 72px;
+
+  }
 .channelName{
   margin-top: -47px;
-    margin-left: 556px;
+    margin-left: 300px;
 }
 .me{
   padding-right: 10px;
@@ -179,5 +188,9 @@
   padding-left:10px;
 }
 #signoutButton{
-  margin-left: 72px;
+  margin-top: -106px;
+  margin-left: 765px;
 }
+/* #yourChannel{
+  margin-top:-65px;
+} */

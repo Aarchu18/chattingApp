@@ -1,21 +1,27 @@
 <div class="container">
   <div class="header">
-    <img class="profileImage" [src]='image' />
-    <p class="profileName"> {{name}}!!</p>
-    <br>
-    <input id="style" type="text" class="form-control" (keyup)="searchChannel()" placeholder="Search Channel" [(ngModel)]="channel">
+    
+    
     <div class="channelName">
-      <h3>Your Channel: {{myChannelName}}</h3>
+      <h3 id="yourChannel"> Your Channel: {{myCName}}</h3>
     </div>
+    <hr>
+    <button id="signoutButton" (click)="signOut()" class="btn btn-success">SignOut <i class="fa fa-sign-out"></i></button>
   </div>
+  <hr/>
   <div class="jumbotron" align="center">
-    <div (click)="joinChannel()">{{gotChannel}}</div>
+    
     <div class="leftSide">
+        <img class="profileImage" [src]='image' />
+        <p class="profileName"> {{name}}!!</p>
       <br/>
+      <input  type="text" class="form-control" (keyup)="searchChannel()" placeholder="Search Channel" [(ngModel)]="channel">
+      <div  class="gotChannel"(click)="joinChannel()">{{gotChannel}}</div>
+<br/>
       <input type="text" placeholder="Your Channel Name" class="form-control addChannel" [(ngModel)]="newChannel">
       <button type="button" id="addButton" class="btn btn-success" (click)=" addChannels()">Add</button>
 
-      <div>
+      <div class="channelList">
         <h4>Your channels</h4>
         <p *ngFor="let channelId of myChannelList" (click)="getAllMessages(channelId.id)">#{{channelId.name}}</p>
       </div>
@@ -28,12 +34,13 @@
           <p class="senderName">{{message.senderId}}</p>
         </div>
       </ul>
-      <input id="search" type="text" placeholder="Your Message" class="form-control" [(ngModel)]="myMessages">
+      <div class="msg">
+      <input id="search" type="text" placeholder=" Enter Your Message" class="form-control" [(ngModel)]="myMessages">
       <button id="sendButton" class="btn btn-success" (click)="sendMessage()">send</button>
-
+    </div>
     </div>
    
   </div>
-  <button id="signoutButton" (click)="signOut()" class="btn btn-success">SignOut</button>
+  
 
 </div>

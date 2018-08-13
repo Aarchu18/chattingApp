@@ -19,6 +19,10 @@ export class ChatComponent implements OnInit {
   newChannel: string;
   name = localStorage.getItem("name");
   image = localStorage.getItem("image");
+  totalChannels = [];
+  cSid: string;
+  channelName: string;
+  cSidList = [];
 
 
   constructor(private chatService: ChatServiceService, private routes: Router) { }
@@ -28,20 +32,21 @@ export class ChatComponent implements OnInit {
       console.log("channel created " + JSON.stringify(response.sid));
     },
       error => {
+        alert("Channel Already Exist!!");
         console.log(error);
       });
   }
 
 
   searchChannel() {
-    this.chatService.searchChannel().subscribe(res => {
-      for (let index = 0; index < res.channels.length; index++) {
-        this.channelArray.push(res.channels[index].unique_name)
+    this.chatService.searchChannel().subscribe(response => {
+      for (let index = 0; index < response.channels.length; index++) {
+        this.channelArray.push(response.channels[index].unique_name)
         this.arrayLength = this.channelArray.length;
         for (let index = 0; index < this.arrayLength; index++) {
           if (this.channelArray[index] == this.channel) {
             this.gotChannel = this.channel;
-            this.getCId = res.channels[index].sid;
+            this.getCId = response.channels[index].sid;
             break;
           }
           else {
@@ -51,83 +56,69 @@ export class ChatComponent implements OnInit {
         }
       }
     },
-      err => {
-        console.log(err);
+      error => {
+        console.log(error);
       })
   }
   joinChannel() {
     console.log(this.getCId);
-    this.chatService.joinChannel(this.getCId).subscribe(res => {
-      console.log(res);
+    this.chatService.joinChannel(this.getCId).subscribe(response => {
+      console.log(response);
       this.routes.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
         this.routes.navigate(["/chat"]));
-    }, err => {
-      console.log(err);
+    }, error => {
+      console.log(error);
 
     })
   }
-  // this.setinterval=setInterval(()=>{
-  //   this.chatService.getAllMessages().subscribe(res=>{
-  //     this.messages=res.messages;
 
-  //   })
-  // })
 
 
   sendMessage() {
-    this.chatService.sendMessage(this.myMessages).subscribe(res => {
-      console.log(res);
-      //  this.chatService.getAllMessages(channelId);
-      // setInterval("location.reload(true);", 500);
-      // this.routes.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
-      // this.routes.navigate(["/chat"]));
+    this.chatService.sendMessage(this.myMessages).subscribe(response => {
+      console.log(response);
+
     },
-      err => {
-        console.log(err);
+      error => {
+        console.log(error);
       })
 
 
   }
-channels:string="";
-  getAllMessages(channelId) {
-    this.getChannelName(channelId);
+  channels: string = "";
+  getAllMessages(cId) {
+    this.getChannelName(cId);
     this.allMessages = [];
-    this.channels=channelId;
+    this.channels = cId;
 
-    this.chatService.getAllMessages(channelId).subscribe(res => {
+    this.chatService.getAllMessages(cId).subscribe(response => {
       setInterval(() => {
-        this.chatService.getAllMessages(this.channels).subscribe(res => {
-          this.totalMessages = res.messages.length;
+        this.chatService.getAllMessages(this.channels).subscribe(response => {
+          this.totalMessages = response.messages.length;
           for (let index = 0; index < this.totalMessages; index++) {
-            if (res.messages[index].from == this.roleIdentity)
-              this.allMessages[index] = { msg: res.messages[index].body, sender: true, senderId: res.messages[index].from }
+            if (response.messages[index].from == this.roleId)
+              this.allMessages[index] = { msg: response.messages[index].body, sender: true, senderId: response.messages[index].from }
             else
-              this.allMessages[index] = { msg: res.messages[index].body, sender: false, senderId: res.messages[index].from }
+              this.allMessages[index] = { msg: response.messages[index].body, sender: false, senderId: response.messages[index].from }
           }
         }),
-          err => {
-            console.log(err);
+          error => {
+            console.log(error);
           }
       }, 1000);
 
-      err => {
-        console.log(err);
+      error => {
+        console.log(error);
       }
 
-  })
-}
-
-
-  totalChannels = [];
-  cSid: string;
-  channelName: string;
-  cSidList = [];
+    })
+  }
   listJoinedChannel() {
-    this.chatService.searchChannel().subscribe(res => {
-      console.log('res', res)
-      this.totalChannels = res.channels;
-      for (let index = 0; index < res.channels.length; index++) {
-        this.cSid = res.channels[index].sid;
+    this.chatService.searchChannel().subscribe(response => {
+      console.log('response', response)
+      this.totalChannels = response.channels;
+      for (let index = 0; index < response.channels.length; index++) {
+        this.cSid = response.channels[index].sid;
 
         this.cSidList[index] = (this.cSid);
       }
@@ -137,16 +128,16 @@ channels:string="";
   }
   myChannelList: Array<{ name: string, id: string }> = [];
 
-  roleIdentity = this.chatService.identity;
-  seperateChannelSid(res) {
+  roleId = this.chatService.identity;
+  seperateChannelSid(response) {
     console.log(this.totalChannels, "this.totalChannerls");
-    res.members.forEach((element1) => {
+    response.members.forEach((element1) => {
 
-      if (this.roleIdentity == element1.identity) {
+      if (this.roleId == element1.identity) {
 
-        this.totalChannels.forEach((elemet) => {
-          if (element1.channel_sid == elemet.sid) {
-            this.myChannelList.push({ name: elemet.unique_name, id: elemet.sid })
+        this.totalChannels.forEach((element) => {
+          if (element1.channel_sid == element.sid) {
+            this.myChannelList.push({ name: element.unique_name, id: element.sid })
           }
         })
 
@@ -157,18 +148,18 @@ channels:string="";
   userListInChannel(channelList) {
     this.myChannelList = [];
     channelList.forEach(element => {
-      this.chatService.getMembersOfChannel(element).subscribe(res => {
-        this.seperateChannelSid(res)
-      }, err => {
-        console.log(err);
+      this.chatService.getMembersOfChannel(element).subscribe(response => {
+        this.seperateChannelSid(response)
+      }, error => {
+        console.log(error);
       })
     });
   }
-  myChannelName: string = "";
-  getChannelName(myChannelId) {
-    this.chatService.getChannelDetail(myChannelId).subscribe(res => {
-      console.log("channel detail", res);
-      this.myChannelName = res.unique_name;
+  myCName: string = "";
+  getChannelName(myCId) {
+    this.chatService.getChannelDetail(myCId).subscribe(response => {
+      console.log("channel detail", response);
+      this.myCName = response.unique_name;
 
     });
   }
@@ -181,8 +172,6 @@ channels:string="";
 
     this.listJoinedChannel();
     this.getAllMessages("");
-    // this.chatService.joinChannel("CHccf567cff42447bdab60f7dfdfe10aeb");
-
     this.userData = this.chatService.getData();
 
   }
