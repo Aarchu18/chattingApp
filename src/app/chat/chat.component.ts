@@ -23,6 +23,7 @@ export class ChatComponent implements OnInit {
   cSid: string;
   channelName: string;
   cSidList = [];
+  myCName: string = "";
 
 
   constructor(private chatService: ChatServiceService, private routes: Router) { }
@@ -46,6 +47,7 @@ export class ChatComponent implements OnInit {
         for (let index = 0; index < this.arrayLength; index++) {
           if (this.channelArray[index] == this.channel) {
             this.gotChannel = this.channel;
+            
             this.getCId = response.channels[index].sid;
             break;
           }
@@ -66,7 +68,9 @@ export class ChatComponent implements OnInit {
       console.log(response);
       this.routes.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
         this.routes.navigate(["/chat"]));
+        alert("Please join the channel!!");
     }, error => {
+      alert("You already joined the channel!!");
       console.log(error);
 
     })
@@ -130,7 +134,7 @@ export class ChatComponent implements OnInit {
 
   roleId = this.chatService.identity;
   seperateChannelSid(response) {
-    console.log(this.totalChannels, "this.totalChannerls");
+    console.log(this.totalChannels, "this.totalChannels");
     response.members.forEach((element1) => {
 
       if (this.roleId == element1.identity) {
@@ -155,7 +159,7 @@ export class ChatComponent implements OnInit {
       })
     });
   }
-  myCName: string = "";
+  
   getChannelName(myCId) {
     this.chatService.getChannelDetail(myCId).subscribe(response => {
       console.log("channel detail", response);
