@@ -47,7 +47,7 @@ export class ChatComponent implements OnInit {
         for (let index = 0; index < this.arrayLength; index++) {
           if (this.channelArray[index] == this.channel) {
             this.gotChannel = this.channel;
-            
+
             this.getCId = response.channels[index].sid;
             break;
           }
@@ -68,7 +68,7 @@ export class ChatComponent implements OnInit {
       console.log(response);
       this.routes.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
         this.routes.navigate(["/chat"]));
-        alert("Please join the channel!!");
+      alert("Please join the channel!!");
     }, error => {
       alert("You already joined the channel!!");
       console.log(error);
@@ -159,7 +159,7 @@ export class ChatComponent implements OnInit {
       })
     });
   }
-  
+
   getChannelName(myCId) {
     this.chatService.getChannelDetail(myCId).subscribe(response => {
       console.log("channel detail", response);
